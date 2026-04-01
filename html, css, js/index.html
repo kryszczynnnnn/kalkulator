@@ -7,36 +7,38 @@
     <title>Kalkulator</title>
 </head>
 <body>
+    <button class="history-btn">Menubtn</button>
     <div class="container">
-        <div class="value-box">0</div>
+        <div class="value-box" id="value-box">0</div>
         <div class="buttons-container">
-            <button class="operation-btn">%</button>
-            <button class="operation-btn">CE</button>
-            <button class="operation-btn">C</button>
-            <button class="operation-btn">DELETE</button>
-            <button class="operation-btn">\( \frac{1}{x} \)</button>
-            <button class="operation-btn">\(x^{2}\)</button>
-            <button class="operation-btn">\(\sqrt[2]{x}\)</button>
-            <button class="operation-btn">/</button>
-            <button class="number-btn">7</button>
-            <button class="number-btn">8</button>
-            <button class="number-btn">9</button>
-            <button class="operation-btn">x</button>
-            <button class="number-btn">4</button>
-            <button class="number-btn">5</button>
-            <button class="number-btn">6</button>
-            <button class="operation-btn">-</button>
-            <button class="number-btn">1</button>
-            <button class="number-btn">2</button>
-            <button class="number-btn">3</button>
-            <button class="operation-btn">+</button>
-            <button class="number-btn">+/-</button>
-            <button class="number-btn">0</button>
-            <button class="number-btn">,</button>
-            <button class="equal-btn">=</button>
+            <button onclick='operation("modulo")' class="operation-btn">%</button>
+            <button onclick='operation("CE")' class="operation-btn">CE</button>
+            <button onclick='operation("C")' class="operation-btn">C</button>
+            <button onclick='operation("BackOne")' class="operation-btn">X</button>
+            <button onclick='operation("1/x")' class="operation-btn">\( \frac{1}{x} \)</button>
+            <button onclick='operation("x2")' class="operation-btn">\(x^{2}\)</button>
+            <button onclick='operation("sqrt")' class="operation-btn">\(\sqrt[2]{x}\)</button>
+            <button onclick='operation("/")' class="operation-btn">/</button>
+            <button onclick='addnumber("7")' class="number-btn">7</button>
+            <button onclick='addnumber("8")' class="number-btn">8</button>
+            <button onclick='addnumber("9")' class="number-btn">9</button>
+            <button onclick='operation("*")' class="operation-btn">x</button>
+            <button onclick='addnumber("4")' class="number-btn">4</button>
+            <button onclick='addnumber("5")' class="number-btn">5</button>
+            <button onclick='addnumber("6")' class="number-btn">6</button>
+            <button onclick='operation("-")' class="operation-btn">-</button>
+            <button onclick='addnumber("1")' class="number-btn">1</button>
+            <button onclick='addnumber("2")' class="number-btn">2</button>
+            <button onclick='addnumber("3")' class="number-btn">3</button>
+            <button onclick='operation("+")' class="operation-btn">+</button>
+            <button onclick='operation("/")' class="number-btn">+/-</button>
+            <button onclick='addnumber("0")' class="number-btn">0</button>
+            <button onclick='addnumber(".")' class="number-btn">,</button>
+            <button onclick='equals()' class="equal-btn">=</button>
 
         </div>
     </div>
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>
