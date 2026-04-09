@@ -76,6 +76,13 @@ function backOne() {
     console.log(lastElement)
 }
 
+function clearDisplay() {
+    currentInput = '';
+    lastInput = '';
+    currentOperation = '';
+    valueBox.textContent = "0";
+}
+
 function equals() {
     calculate()
 }
