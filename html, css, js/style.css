@@ -22,6 +22,11 @@ body {
     background-color: #dbdbdb;
     box-shadow: 0px 0px 3px #ffffffb0;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.history-btn:hover {
+    background-color: #ffffffb0;
 }
 
 .container {
