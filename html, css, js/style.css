@@ -13,7 +13,15 @@ body {
 
 .history-btn {
     position: absolute;
-    display: none;
+    display: block;
+    top: 30px;
+    left: 30px;
+    padding: 10px;
+    border: none;
+    border-radius: 28px;
+    background-color: #dbdbdb;
+    box-shadow: 0px 0px 3px #ffffffb0;
+    cursor: pointer;
 }
 
 .container {
@@ -25,6 +33,7 @@ body {
 .container .value-box {
     display: flex;
     height: 200px;
+    overflow: hidden;
     justify-content: flex-end;
     align-items: center;
     font-size: 60px;
@@ -44,6 +53,7 @@ body {
     cursor: pointer;
     padding: 20px;
     border-radius: 16px;
+    font-weight: 800;
     /* font-size: 20px; */
 }
 
@@ -53,12 +63,22 @@ body {
     color: #fff;
 }
 
+.operation-btn:hover {
+    background-color: #2327ffc7;
+}
+
 .number-btn {
     border: 1px solid #ffffff2c;
     background-color: #000000;
     color: #fff;
     box-shadow: 0px 0px 5px #ffffff49;
     transition: all 0.3s ease;
+}
+
+.equal-btn {
+    background-color: #fff;
+    border: 2px solid #808080;
+    border-collapse: collapse;
 }
 
 .number-btn:hover {

@@ -30,6 +30,27 @@ function operation(operationType) {
     valueBox.textContent = `${lastInput}${currentOperation}`;
 }
 
+function instantOperation(type) {
+    let result;
+    switch (type) {
+        case "1/x":
+            result = 1/currentInput;
+            break;
+        case "x2":
+            result = currentInput * currentInput;
+            break;
+        case "sqrt":
+            result = Math.sqrt(currentInput)
+            break;
+        default:
+            return;
+    }
+    if (result) {
+        currentInput = result
+        valueBox.textContent = `${currentInput}`
+    }
+}
+
 function calculate() {
     if (lastInput === '' || currentInput === '') return;
     let result = "";
@@ -64,15 +85,13 @@ function calculate() {
 
 
 function backOne() {
-    let lastElement = parseInt(valueBox.textContent.slice(-1))
+    let lastElement = valueBox.textContent.slice(-1)
     console.log(typeof lastElement)
-    if (typeof lastElement === "number") {
+    if (!"+-/*".includes(lastElement)) {
         currentInput = currentInput.slice(0, -1)
         console.log(currentInput)
-    } else if (("+-/*").includes(type)) {
-        currentOperation = "backed"
+        valueBox.textContent = valueBox.textContent.slice(0, -1);
     }
-    valueBox.textContent = valueBox.textContent.slice(0, -1);
     console.log(lastElement)
 }
 
