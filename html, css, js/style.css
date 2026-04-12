@@ -35,6 +35,15 @@ body {
     height: 100vh;
 }
 
+.container #previous-input {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    color: #fff;
+    text-align: right;
+    font-weight: 300;
+}
+
 .container .value-box {
     display: flex;
     height: 200px;

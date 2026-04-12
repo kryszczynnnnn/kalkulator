@@ -1,4 +1,5 @@
 let valueBox = document.getElementById("value-box");
+let lastInputBox = document.getElementById("previous-input");
 let lastOperation = ""
 let currentOperation = ""
 let lastInput = ""
@@ -15,7 +16,7 @@ function addnumber(numberToAdd) {
         boxValue += numberToAdd
         currentInput += numberToAdd
     }
-    valueBox.textContent = `${lastInput}${currentOperation}${currentInput}`
+    valueBox.textContent = `${currentInput}`
     console.log(valueBox)
 }
 
@@ -27,7 +28,8 @@ function operation(operationType) {
     currentOperation = operationType;
     lastInput = currentInput;
     currentInput = "";
-    valueBox.textContent = `${lastInput}${currentOperation}`;
+    lastInputBox.textContent = `${lastInput}${currentOperation}`;
+    valueBox.textContent = "0"
 }
 
 function instantOperation(type) {
@@ -81,6 +83,7 @@ function calculate() {
     currentOperation = "";
     lastInput = "";
     valueBox.textContent = `${currentInput}`
+    lastInputBox.textContent = ""
 }
 
 
@@ -100,6 +103,7 @@ function clearDisplay() {
     lastInput = '';
     currentOperation = '';
     valueBox.textContent = "0";
+    lastInputBox.textContent = "";
 }
 
 function equals() {
