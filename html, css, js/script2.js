@@ -107,6 +107,11 @@ function clearDisplay() {
     lastInputBox.textContent = "";
 }
 
+function clearEntry() {
+    currentInput = '';
+    valueBox.textContent = "0";
+}
+
 function equals() {
     calculate()
 }
