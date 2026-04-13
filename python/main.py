@@ -1,16 +1,19 @@
+
+# IMPORTING REQUIRED LIBRARIES AND VARIABLES
 from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QHBoxLayout, QMainWindow, QGridLayout, QGroupBox, QDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QHBoxLayout, QMainWindow, QGridLayout, QGroupBox, QDialog, QScrollArea, QSlider
 from PyQt5.QtGui import QIcon
 import math
 from style import QSS
 import sys
 
-temp_type = ""
-is_inserted = False
-liczba1 = ""
-liczba2 = ""
-history = []
-id_counter = 0
+# GLOBAL VARIABLES
+temp_type = ""         # Stores the type of last operator used
+is_inserted = False    # Checks, if 
+liczba1 = ""           # Writes down the number before adding operator
+liczba2 = ""           # Writes down the number after adding operator
+history = []           # Writes down all calculations done in that session
+id_counter = 0         # Gives an ID for a history item
 
 class Window(QDialog):
     def __init__(self):
@@ -19,61 +22,87 @@ class Window(QDialog):
         self.setFixedSize(QSize(400, 400))
         self.setStyleSheet(QSS)
         self.initUI()
-        
+    
+    # Generating UI for a window    
     def initUI(self):
         self.calculator()
         
+        # Creates a label for displaying current operation
         self.wyliczone = QLabel("", objectName="wyliczone")
-        self.wpis = QLabel("0", objectName="wpis")
-        
-        self.wpis.setAlignment(Qt.AlignRight)
         self.wyliczone.setAlignment(Qt.AlignRight)
-        self.history_widget = QVBoxLayout()
         
-        windowLayout = QHBoxLayout()
+        # Creates a label for displaying and storing current variable data (Used to paste info into liczba1 and liczba2)
+        self.wpis = QLabel("0", objectName="wpis")
+        self.wpis.setAlignment(Qt.AlignRight)
+        
+        # Creating a history widget
+        history_widget_wrapper = QVBoxLayout(objectName = "scroll_widget")
+        history_widget_label = QLabel("Historia Obliczeń")
+        
+        self.history_layout = QVBoxLayout(objectName = "scroll_widget")
+        self.history_layout.setAlignment(Qt.AlignTop)
+        history_widget = QWidget(objectName = "scroll_widget")
+        
+        # Defining a scroll wrapper for a history widget
+        history_widget_scroll_wrapper = QScrollArea()
+        
+        history_widget_scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        history_widget_scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        history_widget_scroll_wrapper.setWidgetResizable(True)
+        
+        history_widget.setLayout(self.history_layout)
+        history_widget_scroll_wrapper.setWidget(history_widget)
+        history_widget_wrapper.setAlignment(Qt.AlignTop)
+        history_widget_wrapper.addWidget(history_widget_label)
+        history_widget_wrapper.addWidget(history_widget_scroll_wrapper)
+        
+        # Adding all calculator widget to the calculator layout
         calculator_layout = QVBoxLayout()
         calculator_layout.addWidget(self.wyliczone)
         calculator_layout.addWidget(self.wpis)
-        calculator_layout.addWidget(self.horizontalGroupBox)
+        calculator_layout.addWidget(self.button_group)
+        
+        # Adding all widgets to one layout
+        windowLayout = QHBoxLayout()
         windowLayout.addLayout(calculator_layout)
-        windowLayout.addLayout(self.history_widget)
+        windowLayout.addLayout(history_widget_wrapper)
         self.setLayout(windowLayout)
         
         self.show()    
     
     def calculator(self):
-        self.horizontalGroupBox = QGroupBox()
-        layout = QGridLayout()
+        self.button_group = QGroupBox(objectName="guziki_wrapper")
+        layout = QGridLayout(objectName="guziki")
         layout.setColumnStretch(1, 3)
         layout.setColumnStretch(2, 4)
         
         # ROW 1
-        percent_button = QPushButton(text="%")
+        percent_button = QPushButton(text="%", objectName="operation_button")
         percent_button.clicked.connect(lambda:self.operation(type="%"))
         layout.addWidget(percent_button, 0, 0)
         
-        clear_all_button = QPushButton(text="CE")
+        clear_all_button = QPushButton(text="CE", objectName="delete_button")
         clear_all_button.clicked.connect(self.clear_all)
         layout.addWidget(clear_all_button, 0, 1)
         
-        clear_button = QPushButton(text="C")
+        clear_button = QPushButton(text="C", objectName="delete_button")
         clear_button.clicked.connect(self.clear)
         layout.addWidget(clear_button, 0, 2)
         
-        delete_button = QPushButton(text="<-")
+        delete_button = QPushButton(text="<-", objectName="delete_button")
         delete_button.clicked.connect(self.delete)
         layout.addWidget(delete_button, 0, 3)
         
         # ROW 2
-        ulamek_button = QPushButton(text="1/X")
+        ulamek_button = QPushButton(text="1/X", objectName="operation_button")
         ulamek_button.clicked.connect(lambda:self.operation(type="1/X"))
         layout.addWidget(ulamek_button, 1, 0)
         
-        square_root_button = QPushButton(text="√X")
+        square_root_button = QPushButton(text="√X", objectName="operation_button")
         square_root_button.clicked.connect(lambda:self.operation(type="root"))
         layout.addWidget(square_root_button, 1, 1)
         
-        power_button = QPushButton(text="X²")
+        power_button = QPushButton(text="X²", objectName="operation_button")
         power_button.clicked.connect(lambda:self.operation(type="power"))
         layout.addWidget(power_button, 1, 2)
         
@@ -81,7 +110,7 @@ class Window(QDialog):
         
         for i in range(1, len(operation_symbols)+1):
             symbol = operation_symbols[i-1]
-            button = QPushButton(text=symbol)
+            button = QPushButton(text=symbol, objectName="operation_button")
             button.clicked.connect(lambda _, t=button.text(): self.operation(type=t))
             layout.addWidget(button, i, 3)
         
@@ -93,7 +122,7 @@ class Window(QDialog):
                 layout.addWidget(button, i, j)
                 
         # ROW 6
-        reverse_button = QPushButton(text="+/-")
+        reverse_button = QPushButton(text="+/-", objectName="operation_button")
         reverse_button.clicked.connect(lambda:self.operation(type="reverse"))
         layout.addWidget(reverse_button, 6, 0)
         
@@ -105,18 +134,18 @@ class Window(QDialog):
         dot_button.clicked.connect(lambda:self.enter(dot_button.text()))
         layout.addWidget(dot_button, 6, 2)
         
-        equals_button = QPushButton(text="=")
+        equals_button = QPushButton(text="=", objectName="equals_button")
         equals_button.clicked.connect(lambda:self.operation(type=equals_button.text()))
         layout.addWidget(equals_button, 6, 3)
         
-        self.horizontalGroupBox.setLayout(layout)
+        self.button_group.setLayout(layout)
         
     def add_history_item(self, rownanie, result):
         global temp_type, is_inserted, liczba1, liczba2, id_counter
         id = id_counter
-        history_button = QPushButton(text = rownanie+result)
+        history_button = QPushButton(text = rownanie+result, objectName="history_button")
         history_button.clicked.connect(lambda _, t=history_button.text(): self.history_item_action(id))
-        self.history_widget.addWidget(history_button)
+        self.history_layout.addWidget(history_button)
         history.append([temp_type, is_inserted, liczba1, liczba2, rownanie])
         id_counter = id_counter + 1
         
