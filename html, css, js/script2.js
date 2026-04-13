@@ -1,9 +1,10 @@
 let valueBox = document.getElementById("value-box");
 let lastInputBox = document.getElementById("previous-input");
-let lastOperation = ""
-let currentOperation = ""
-let lastInput = ""
-let currentInput = ""
+let lastOperation = "";
+let currentOperation = "";
+let lastInput = "";
+let currentInput = "";
+let history = {};
 
 let boxValue = ""
 
@@ -108,4 +109,11 @@ function clearDisplay() {
 
 function equals() {
     calculate()
+}
+
+function charChange() {
+    let inputValue = parseFloat(currentInput)
+    let result = inputValue * (-1)
+    currentInput = result
+    valueBox.textContent = result
 }
