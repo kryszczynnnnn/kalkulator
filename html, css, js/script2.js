@@ -5,6 +5,12 @@ let currentOperation = "";
 let lastInput = "";
 let currentInput = "";
 let history = {};
+let template = {
+    first: "",
+    operator: "",
+    scnd: "",
+    result: "",
+}
 
 let boxValue = ""
 
