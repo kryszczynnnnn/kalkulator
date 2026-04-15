@@ -27,11 +27,11 @@ QLabel{
 
 QLabel#wyliczone{
     font-size: 16px;
-    opacity: 50%;
+    color: #999999;
 }
 
 QLabel#wpis{
-    font-size: 32px;
+    font-size: 48px;
 }
 
 QDialog{
@@ -51,11 +51,13 @@ QPushButton{
 }
 
 QPushButton#history_button{
-    background: transparent;
+    background-color: #222222;
+    text-align: left;
     border: none;
     width: auto;
     height: 48px;
-    border-radius: 0px;
+    border-radius: 8px;
+    padding: 4px;
 }
 
 QPushButton:hover{
@@ -70,7 +72,9 @@ QPushButton:hover{
 
 QPushButton#operation_button{
     background-color: #1064e3;
-    border: none;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #1064e3;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -78,7 +82,9 @@ QPushButton#operation_button{
 
 QPushButton#operation_button:hover{
     background-color: #3296e3;
-    border: none;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #3296e3;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -86,7 +92,9 @@ QPushButton#operation_button:hover{
 
 QPushButton#delete_button{
     background-color: #ed3939;
-    border: none;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #ed3939;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -94,7 +102,9 @@ QPushButton#delete_button{
 
 QPushButton#delete_button:hover{
     background-color: #eb6767;
-    border: none;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #eb6767;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -102,7 +112,20 @@ QPushButton#delete_button:hover{
 
 QPushButton#equals_button{
     background-color: #e1e1e1;
-    border: none;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #e1e1e1;
+    width: 64px;
+    height: 64px;
+    color: #000000;
+    border-radius: 8px;
+}
+
+QPushButton#equals_button:hover{
+    background-color: #f5f5f5;
+    border-width: 2px;
+	border-style: solid;
+	border-color: #f5f5f5;
     width: 64px;
     height: 64px;
     color: #000000;

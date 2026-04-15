@@ -1,3 +1,4 @@
+# Program was written by Serhii Skyba
 
 # IMPORTING REQUIRED LIBRARIES AND VARIABLES
 from PyQt5.QtCore import QSize, Qt
@@ -19,7 +20,6 @@ class Window(QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Kalkulator")
-        self.setFixedSize(QSize(400, 400))
         self.setStyleSheet(QSS)
         self.initUI()
     
@@ -70,87 +70,124 @@ class Window(QDialog):
         
         self.show()    
     
+    # DEFINING THE GUI FOR CALCULATOR ITSELF
     def calculator(self):
+        
+        # Defining button wrapper
         self.button_group = QGroupBox(objectName="guziki_wrapper")
         layout = QGridLayout(objectName="guziki")
-        layout.setColumnStretch(1, 3)
-        layout.setColumnStretch(2, 4)
+        #layout.setColumnStretch(1, 3)
+        #layout.setColumnStretch(2, 4)
         
-        # ROW 1
+        # Creating first row of buttons
+        # - Creating % button, which divides number by 100
         percent_button = QPushButton(text="%", objectName="operation_button")
         percent_button.clicked.connect(lambda:self.operation(type="%"))
         layout.addWidget(percent_button, 0, 0)
         
+        # - Creating clear all button, which clears all the values
         clear_all_button = QPushButton(text="CE", objectName="delete_button")
         clear_all_button.clicked.connect(self.clear_all)
         layout.addWidget(clear_all_button, 0, 1)
         
+        # - Creating clear button, which clears all the values
         clear_button = QPushButton(text="C", objectName="delete_button")
         clear_button.clicked.connect(self.clear)
         layout.addWidget(clear_button, 0, 2)
         
+        # - Creating a delete button, which deletes last entered character
         delete_button = QPushButton(text="<-", objectName="delete_button")
         delete_button.clicked.connect(self.delete)
         layout.addWidget(delete_button, 0, 3)
         
-        # ROW 2
+        # Creating second row of buttons
+        # - Creating a 1/X button, which divides 1 by the currently entered number
         ulamek_button = QPushButton(text="1/X", objectName="operation_button")
         ulamek_button.clicked.connect(lambda:self.operation(type="1/X"))
         layout.addWidget(ulamek_button, 1, 0)
         
+        # - Creating a square root button, which finds out a root of an entered number
         square_root_button = QPushButton(text="√X", objectName="operation_button")
         square_root_button.clicked.connect(lambda:self.operation(type="root"))
         layout.addWidget(square_root_button, 1, 1)
         
+        # - Creating a power of 2 button, which multiplyes current value by itself
         power_button = QPushButton(text="X²", objectName="operation_button")
         power_button.clicked.connect(lambda:self.operation(type="power"))
         layout.addWidget(power_button, 1, 2)
         
+        # Defining main calculation sumbols
         operation_symbols=["/", "*", "+", "-"]
         
+        # Mass producing operation buttons, based on the operation symbols in the table above
+        # Those cover last column of rows from 2 to 5
         for i in range(1, len(operation_symbols)+1):
             symbol = operation_symbols[i-1]
             button = QPushButton(text=symbol, objectName="operation_button")
             button.clicked.connect(lambda _, t=button.text(): self.operation(type=t))
             layout.addWidget(button, i, 3)
         
-        # NUMPAD
+        # Mass producing number buttons from 1 to 9
+        # Those cover first three columns in the rows from 2 to 5
         for i in range(2,5):
             for j in range(0, 3):
                 button = QPushButton(text=str(j+(i-2)*3+1))
                 button.clicked.connect(lambda _, t=button.text(): self.enter(letter=t))
                 layout.addWidget(button, i, j)
                 
-        # ROW 6
+        # Creating sixth row of buttons
+        # - Creating a +/- button, which turns value of current number to the oposite one
         reverse_button = QPushButton(text="+/-", objectName="operation_button")
         reverse_button.clicked.connect(lambda:self.operation(type="reverse"))
         layout.addWidget(reverse_button, 6, 0)
         
+        # - Creating a 0 button, which would add 0 to the user number
         zero_button = QPushButton(text="0")
         zero_button.clicked.connect(lambda:self.enter(zero_button.text()))
         layout.addWidget(zero_button, 6, 1)
         
+        # - Creating a . button, which would add . to the user number
         dot_button = QPushButton(text=".")
         dot_button.clicked.connect(lambda:self.enter(dot_button.text()))
         layout.addWidget(dot_button, 6, 2)
         
+        # - Creating a = button, which would apply the equasion
         equals_button = QPushButton(text="=", objectName="equals_button")
         equals_button.clicked.connect(lambda:self.operation(type=equals_button.text()))
         layout.addWidget(equals_button, 6, 3)
         
+        # Exporting layout
         self.button_group.setLayout(layout)
         
+    # DEFINING FUNCTION, WHICH ADDS OPERATIONS DONE BY USER INTO LIST
     def add_history_item(self, rownanie, result):
+        
+        # Importing global variables
         global temp_type, is_inserted, liczba1, liczba2, id_counter
         id = id_counter
+        
+        # Defining history button, which would have a unique id with coresponding user action
         history_button = QPushButton(text = rownanie+result, objectName="history_button")
         history_button.clicked.connect(lambda _, t=history_button.text(): self.history_item_action(id))
         self.history_layout.addWidget(history_button)
+        
+        # Adding new item to the list of history items
+        # - Each history item will have a following subitems:
+        # -- temp_type = operation type
+        # -- is_inserted = checks, if the number should to be replaced on entering new number or not
+        # -- liczba1 = first number of the operation
+        # -- liczba2 = second number of the operation
+        # -- rownanie = final equasion
         history.append([temp_type, is_inserted, liczba1, liczba2, rownanie])
         id_counter = id_counter + 1
         
+    # DEFINING FUNCTION, WHICH INNACTS HISTORY ITEM
     def history_item_action(self, id):
+        
+        # Importing global variables
         global temp_type, is_inserted, liczba1, liczba2, history
+        
+        # Assining values from list to the GUI
         liczba1 = history[id][2]
         liczba2 = history[id][3]
         temp_type = history[id][0]
@@ -158,21 +195,41 @@ class Window(QDialog):
         self.wpis.setText(liczba1)
         self.wyliczone.setText(history[id][4])
         
+    # DEFINING CLEAR FUNCTION, WHICH CLEARS ALL VALUES FROM GUI
     def clear(self):
+        
+        # Importing global variables
         global temp_type, is_inserted, liczba1, liczba2
+        
+        # Clearing all the values
         temp_type = ""
         is_inserted = False
         liczba1 = ""
         liczba2 = ""
+        
+        # Checking, if mode is test or not
+        # - This used to insure, that app is posibble to test without GUI
         try:
             self.wyliczone.setText("")
             self.wpis.setText("0")
             return("cleared")
         except AttributeError:
             return("cleared")
-        
+    
+    # DEFINING CLEAR FUNCTION, WHICH CLEARS ALL VALUES FROM GUI
     def clear_all(self):
-        global temp_type, is_inserted, liczba1, liczba2
+        
+        # Importing global variables
+        global temp_type, is_inserted, liczba1, liczba2, history, id_counter
+        
+        # Clearing all the values
+        temp_type = ""
+        is_inserted = False
+        liczba1 = ""
+        liczba2 = ""
+        
+        # Checking, if mode is test or not
+        # - This used to insure, that app is posibble to test without GUI
         try:
             self.wyliczone.setText("")
             self.wpis.setText("0")
@@ -180,18 +237,36 @@ class Window(QDialog):
         except AttributeError:
             return("all cleared")
         
+    # DEFINING ENTER FUNCTION, WHICH WOULD ENTER VALUES INTO USER INPUT BOX
     def enter(self, letter):
+        
+        # Importing global variables
+        global is_inserted
+        
+        # Checking, if mode is test or not
+        # - This used to insure, that app is posibble to test without GUI
         try:
+            
+            # Checks, if the value of user input is 0 or Syntax Error. If so, replaces the whole value of input with entered number
             if (self.wpis.text() == "0" or self.wpis.text() == "Syntax Error" or is_inserted == True):
                 self.wpis.setText(letter)
+                is_inserted = False
+                
+            # Adds number to the user input
             else:
                 self.wpis.setText(self.wpis.text()+letter)
         except AttributeError:
             return(letter)
         
+    # DEFINING DELETE FUNCTION, WHICH DELETES LAST ENTERED NUMBER FROM USER INPUT
     def delete(self):
+        
+        # Checking, if mode is test or not
+        # - This used to insure, that app is posibble to test without GUI
         try:
             text = self.wpis.text()
+            
+            # Checks, if user inputs value is equal to 0 or not
             if (self.wpis != "0"):
                 self.wpis.setText(text[:-1])
             if (self.wpis.text() == ""):
@@ -200,9 +275,14 @@ class Window(QDialog):
                 pass
         except AttributeError:
             return("deleted")
-        
+    
+    # DEFINING OPERATION FUNCTION, WHICH BASED ON THE OPERATION SYBOL, MAKES ACTION
     def operation(self, type):
+        
+        # Importing global variables
         global temp_type, is_inserted, liczba1, liczba2
+        
+        # Checking, which type of operation is gonna be done
         match type:
             case "power":
                 self.wyliczone.setText(self.wpis.text()+"²")
@@ -239,6 +319,7 @@ class Window(QDialog):
                     self.wyliczone.setText(self.wpis.text())
                     is_inserted = True
     
+    # DEFINING OBLICZ FUNCTION, WHICH CALCULATES THE FINAL VALUE OF AN OPERATION
     def oblicz(self, liczba1, liczba2, operation):
         rownanie = liczba1 + str(operation) + liczba2
         try:
@@ -246,8 +327,16 @@ class Window(QDialog):
         except AttributeError:
             pass
         try:
-            result = str(eval(rownanie))
+            try:
+                result = str(eval(rownanie))
+            except SyntaxError:
+                result = "Syntax Error"
+            
             self.add_history_item(rownanie=rownanie+"=", result=result)
+            try:
+                self.wpis.setText(str(result))
+            except AttributeError:
+                pass
             return(str(result))
         except ZeroDivisionError or ValueError:
             try:
@@ -255,10 +344,6 @@ class Window(QDialog):
                 return("Syntax Error")
             except:
                 pass    
-        try:
-            self.wpis.setText(str(result))
-        except AttributeError:
-            pass
         
     
         
