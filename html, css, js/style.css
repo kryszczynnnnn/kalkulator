@@ -9,6 +9,7 @@
 body {
     height: 100vh;
     background-color: #000000;
+    display: flex;
 }
 
 .history-btn {
@@ -33,6 +34,7 @@ body {
     display: grid;
     grid-template-rows: 3fr 2fr;
     height: 100vh;
+    flex: 1;
 }
 
 .container #previous-input {
@@ -98,6 +100,57 @@ body {
 .number-btn:hover {
     scale: 1.05;
     background-color: #131313;
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #030303bd;
+    padding: 10px 15px;
+    min-width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.history-container .container-title {
+    width: 100%;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.history-container .equation-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border: none;
+    background-color: none;
+    background-color: #080808;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: right;
+    margin: 5px 0px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.history-container .equation-btn:hover {
+    background-color: #161616;
+}
+
+.history-container .equation-btn .equation {
+    font-size: 13px;
+    color: #888888;
+}
+
+.history-container .equation-btn .result {
+    font-size: 20px;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 600px) {
