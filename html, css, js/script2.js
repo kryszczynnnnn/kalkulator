@@ -4,13 +4,6 @@ let lastOperation = "";
 let currentOperation = "";
 let lastInput = "";
 let currentInput = "";
-let history = {};
-let template = {
-    first: "",
-    operator: "",
-    scnd: "",
-    result: "",
-}
 
 let boxValue = ""
 
@@ -85,7 +78,7 @@ function calculate() {
             break;
         default:
     }
-
+    addToHistory(first, currentOperation, scnd, result);
     currentInput = result.toString();
     currentOperation = "";
     lastInput = "";
@@ -127,4 +120,39 @@ function charChange() {
     let result = inputValue * (-1)
     currentInput = result
     valueBox.textContent = result
+}
+
+function addToHistory(first, operator, scnd, result) {
+    const historyTab = document.getElementById("history-tab");
+
+    const button = document.createElement("button");
+    button.classList.add("equation-btn");
+
+    button.innerHTML = `
+        <div class="equation">${first} ${operator} ${scnd} =</div>
+        <div class="result">${result}</div>
+    `;
+
+    button.addEventListener("click", historyBtnClick);
+
+    historyTab.appendChild(button);
+}
+
+function historyBtnClick(event) {
+    const button = event.currentTarget;
+
+    const equationText = button.querySelector(".equation").textContent;
+    const resultText = button.querySelector(".result").textContent;
+
+    const parts = equationText.replace("=", "").trim().split(" ");
+
+    const first = parts[0];
+    const operator = parts[1];
+    const second = parts[2];
+    const result = resultText;
+
+    currentInput = result;
+    currentOperation = "";
+    lastInputBox.textContent = `${first} ${operator} ${second}=`;
+    valueBox.textContent = result;
 }

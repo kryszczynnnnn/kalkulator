@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Kalkulator</title>
 </head>
 <body>
-    <button class="history-btn">O</button>
+    <button class="history-btn"><i class="ri-history-line"></i></button>
     <div class="container">
         <div id="previous-input"></div>
         <div class="value-box" id="value-box">0</div>
@@ -41,14 +42,8 @@
     </div>
     <div class="history-container">
         <span class="container-title">History</span>
-        <button class="equation-btn">
-            <div class="equation">30 + 7 =</div>
-            <div class="result">37</div>
-        </button>
-        <button class="equation-btn">
-            <div class="equation">30 + 7 =</div>
-            <div class="result">37</div>
-        </button>
+        <div class="history-tab" id="history-tab"></div>
+        <button class="clearHistory-btn"><i class="ri-history-line"></i> Clear history</button>
     </div>
     <script src="script2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

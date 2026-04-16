@@ -14,16 +14,17 @@ body {
 
 .history-btn {
     position: absolute;
-    display: block;
+    display: none;
     top: 30px;
     left: 30px;
     padding: 10px;
     border: none;
     border-radius: 28px;
-    background-color: #dbdbdb;
+    background-color: #ffffff;
     box-shadow: 0px 0px 3px #ffffffb0;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .history-btn:hover {
@@ -110,8 +111,6 @@ body {
     background-color: #030303bd;
     padding: 10px 15px;
     min-width: 300px;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .history-container .container-title {
@@ -122,7 +121,15 @@ body {
     text-align: left;
 }
 
-.history-container .equation-btn {
+.history-container .history-tab {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.history-container .history-tab .equation-btn {
     display: flex;
     flex-direction: column;
     gap: 7px;
@@ -139,21 +146,47 @@ body {
     transition: all 0.3s ease;
 }
 
-.history-container .equation-btn:hover {
+.history-container .history-tab .equation-btn:hover {
     background-color: #161616;
 }
 
-.history-container .equation-btn .equation {
+.history-container .history-tab .equation-btn .equation {
     font-size: 13px;
     color: #888888;
 }
 
-.history-container .equation-btn .result {
+.history-container .history-tab .equation-btn .result {
     font-size: 20px;
     font-weight: 500;
 }
 
+.history-container .clearHistory-btn {
+    display: flex;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: #fff;
+    font-weight: 300;
+    font-size: 18px;
+    border-collapse: collapse;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: all 0.2s ease;
+}
+
+.history-container .clearHistory-btn:hover {
+    border: 1px solid #383838;
+}
+
 @media screen and (max-width: 600px) {
+    .history-btn {
+        display: block;
+    }
+
+    .history-container {
+        display: none;
+    }
+
     .container {
         grid-template-rows: 2fr 3fr;
     }
