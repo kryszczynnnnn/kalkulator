@@ -156,3 +156,11 @@ function historyBtnClick(event) {
     lastInputBox.textContent = `${first} ${operator} ${second}=`;
     valueBox.textContent = result;
 }
+
+function showHistory() {
+    console.log("xdd")
+    const historyTab = document.getElementById("history-container");
+    historyTab.classList.toggle("historyTab-active");
+}
+
+document.getElementById("history-btn").addEventListener("click", showHistory);
