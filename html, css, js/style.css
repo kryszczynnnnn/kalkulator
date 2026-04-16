@@ -178,8 +178,6 @@ body {
     border: 1px solid #383838;
 }
 
-
-
 @media screen and (max-width: 600px) {
     .history-btn {
         display: block;
@@ -189,15 +187,16 @@ body {
         right: 0px;
         transform: translateX(100%);
         height: 100vh;
+        transition: all 1s ease;
     }
 
     .historyTab-active {
-    position: absolute;
-    display: block;
-    top: 0px;
-    right: 0px;
-    transform: translateX(0%);
-    z-index: 2;
+        position: absolute;
+        display: block;
+        top: 0px;
+        right: 0px;
+        transform: translateX(0%);
+        z-index: 2;
     }
 
     .container {

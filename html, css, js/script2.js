@@ -17,7 +17,6 @@ function addnumber(numberToAdd) {
         currentInput += numberToAdd
     }
     valueBox.textContent = `${currentInput}`
-    console.log(valueBox)
 }
 
 function operation(operationType) {
@@ -89,13 +88,10 @@ function calculate() {
 
 function backOne() {
     let lastElement = valueBox.textContent.slice(-1)
-    console.log(typeof lastElement)
     if (!"+-/*".includes(lastElement)) {
         currentInput = currentInput.slice(0, -1)
-        console.log(currentInput)
         valueBox.textContent = valueBox.textContent.slice(0, -1);
     }
-    console.log(lastElement)
 }
 
 function clearDisplay() {
@@ -123,6 +119,7 @@ function charChange() {
 }
 
 function addToHistory(first, operator, scnd, result) {
+    const clearHistoryBtn = document.getElementById("clearHistory-btn")
     const historyTab = document.getElementById("history-tab");
 
     const button = document.createElement("button");
@@ -136,6 +133,7 @@ function addToHistory(first, operator, scnd, result) {
     button.addEventListener("click", historyBtnClick);
 
     historyTab.appendChild(button);
+    clearHistoryBtn.style.display = "block";
 }
 
 function historyBtnClick(event) {
@@ -158,9 +156,18 @@ function historyBtnClick(event) {
 }
 
 function showHistory() {
-    console.log("xdd")
     const historyTab = document.getElementById("history-container");
     historyTab.classList.toggle("historyTab-active");
+}
+
+function clearHistory() {
+    const historyTab = document.getElementById("history-tab");
+
+    while (historyTab.firstChild) {
+        historyTab.removeChild(historyTab.firstChild);
+    }
+    const clearHistoryBtn = document.getElementById("clearHistory-btn");
+    clearHistoryBtn.style.display = "none";
 }
 
 document.getElementById("history-btn").addEventListener("click", showHistory);
