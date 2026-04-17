@@ -170,4 +170,19 @@ function clearHistory() {
     clearHistoryBtn.style.display = "none";
 }
 
+function percent() {
+    let result;
+
+    if (currentOperation === '+' || currentOperation === '-') {
+        result = (currentInput / 100) * lastInput;
+    } else if (currentOperation === '*' || currentOperation === '/') {
+        result = currentInput / 100;
+    } else {
+        result = currentInput / 100;
+    }
+
+    currentInput = result;
+    valueBox.textContent = result;
+}
+
 document.getElementById("history-btn").addEventListener("click", showHistory);
