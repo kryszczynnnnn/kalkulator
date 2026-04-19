@@ -208,9 +208,9 @@ Testy sprawdzają:
 - obsługę dzielenia przez 0
 - działanie metody calculate()
 ## ⚠️ Uwagi
-Projekt używa Swing (GUI desktopowe)
-Brak zewnętrznych bibliotek
-Kalkulator działa lokalnie
+- Projekt używa Swing (GUI desktopowe)
+- Brak zewnętrznych bibliotek
+- Kalkulator działa lokalnie
 ##  Struktura pliku
 calculator.java
 ## Autor
