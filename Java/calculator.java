@@ -192,7 +192,26 @@ public class calculator extends JFrame {
         historyPanel.revalidate();
     }
 
-    public static void main(String[] args) {
-        new calculator();
+    public double calculate(double a, double b, String op) {
+        switch (op) {
+            case "+": return a + b;
+            case "-": return a - b;
+            case "*": return a * b;
+            case "/": return b != 0 ? a / b : 0;
+            default: return 0;
+        }
     }
+
+    public static void main(String[] args) {
+
+    calculator calc = new calculator();
+
+    System.out.println("TESTY:");
+
+    System.out.println("2 + 3 = " + calc.calculate(2.0, 3.0, "+"));
+    System.out.println("5 - 2 = " + calc.calculate(5.0, 2.0, "-"));
+    System.out.println("4 * 3 = " + calc.calculate(4.0, 3.0, "*"));
+    System.out.println("10 / 2 = " + calc.calculate(10.0, 2.0, "/"));
+    System.out.println("10 / 0 = " + calc.calculate(10.0, 0.0, "/"));
+    }   
 }
