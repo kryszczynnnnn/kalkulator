@@ -21,7 +21,7 @@ public class calculator extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // ===== DISPLAY =====
+        // dispaly 
         JPanel displayPanel = new JPanel(new GridLayout(2,1));
 
         historyDisplay = new JLabel("");
@@ -37,7 +37,7 @@ public class calculator extends JFrame {
 
         add(displayPanel, BorderLayout.NORTH);
 
-        // ===== BUTTONS =====
+        // przyckksi
         JPanel panel = new JPanel(new GridLayout(5, 4));
 
         String[] buttons = {
@@ -58,7 +58,7 @@ public class calculator extends JFrame {
 
         add(panel, BorderLayout.CENTER);
 
-        // ===== HISTORY =====
+        // historia rownan
         historyPanel = new JPanel();
         historyPanel.setLayout(new BoxLayout(historyPanel, BoxLayout.Y_AXIS));
 
@@ -74,7 +74,6 @@ public class calculator extends JFrame {
 
         String currentText = mainDisplay.getText();
 
-        // NUMBERS
         if (input.matches("[0-9]")) {
             if (newInput || currentText.equals("0")) {
                 mainDisplay.setText(input);
@@ -85,7 +84,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // CLEAR
+        // clear
         if (input.equals("C")) {
             mainDisplay.setText("0");
             historyDisplay.setText("");
@@ -94,7 +93,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // +/- change sign
+        // plus/minus
         if (input.equals("+/-")) {
             double val = Double.parseDouble(mainDisplay.getText());
             val *= -1;
@@ -102,7 +101,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // PERCENT
+        // procent
         if (input.equals("%")) {
             double val = Double.parseDouble(mainDisplay.getText());
             val = firstNumber * val / 100;
@@ -110,7 +109,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // SQRT
+        // pierwiastek
         if (input.equals("√")) {
             double val = Double.parseDouble(mainDisplay.getText());
             val = Math.sqrt(val);
@@ -118,7 +117,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // SQUARE
+        // do kwadratu
         if (input.equals("x²")) {
             double val = Double.parseDouble(mainDisplay.getText());
             val = val * val;
@@ -126,7 +125,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // RECIPROCAL
+        // x przez 1
         if (input.equals("1/x")) {
             double val = Double.parseDouble(mainDisplay.getText());
             val = 1 / val;
@@ -134,7 +133,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // OPERATORS
+        // operatory
         if (input.matches("[+\\-*/]")) {
             firstNumber = Double.parseDouble(mainDisplay.getText());
             operator = input;
@@ -146,7 +145,7 @@ public class calculator extends JFrame {
             return;
         }
 
-        // EQUALS
+        // rowna sie
         if (input.equals("=")) {
             double secondNumber = Double.parseDouble(mainDisplay.getText());
             double result = 0;
