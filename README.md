@@ -100,7 +100,7 @@ Uruchom w przeglądarce
 - index.html
 - style.css
 - script.js
-# Cel projektu
+## Cel projektu
 
 Projekt został stworzony w celu:
 
@@ -154,7 +154,7 @@ Skróty są intuicyjne w użyciu. Wszystkie odpowiadają przyciskom kalkulatora,
 
 --- 
 
-### Kalkulator Java (Swing)
+# Kalkulator Java (Swing)
 ## Opis projektu
 
 Jest to graficzny kalkulator napisany w języku Java z wykorzystaniem biblioteki Swing (JFrame).
