@@ -2,8 +2,8 @@
 
 # IMPORTING REQUIRED LIBRARIES AND VARIABLES
 from PyQt5.QtCore import QSize, Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QHBoxLayout, QMainWindow, QGridLayout, QGroupBox, QDialog, QScrollArea, QSlider
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QHBoxLayout, QMainWindow, QGridLayout, QGroupBox, QDialog, QScrollArea, QSlider, QGraphicsOpacityEffect
+from PyQt5.QtGui import QIcon, QFont
 import math
 from style import QSS
 import sys
@@ -23,13 +23,16 @@ class Window(QDialog):
         self.setStyleSheet(QSS)
         self.initUI()
     
-    # Generating UI for a window    
+    # GENERATING UI FOR A WINDOW
     def initUI(self):
         self.calculator()
+        opacity_effect = QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(0.5) 
         
         # Creates a label for displaying current operation
         self.wyliczone = QLabel("", objectName="wyliczone")
         self.wyliczone.setAlignment(Qt.AlignRight)
+        self.wyliczone.setGraphicsEffect(opacity_effect)
         
         # Creates a label for displaying and storing current variable data (Used to paste info into liczba1 and liczba2)
         self.wpis = QLabel("0", objectName="wpis")
@@ -58,8 +61,8 @@ class Window(QDialog):
         
         # Adding all calculator widget to the calculator layout
         calculator_layout = QVBoxLayout()
-        calculator_layout.addWidget(self.wyliczone)
         calculator_layout.addWidget(self.wpis)
+        calculator_layout.addWidget(self.wyliczone)
         calculator_layout.addWidget(self.button_group)
         
         # Adding all widgets to one layout
@@ -76,8 +79,6 @@ class Window(QDialog):
         # Defining button wrapper
         self.button_group = QGroupBox(objectName="guziki_wrapper")
         layout = QGridLayout(objectName="guziki")
-        #layout.setColumnStretch(1, 3)
-        #layout.setColumnStretch(2, 4)
         
         # Creating first row of buttons
         # - Creating % button, which divides number by 100
@@ -86,17 +87,17 @@ class Window(QDialog):
         layout.addWidget(percent_button, 0, 0)
         
         # - Creating clear all button, which clears all the values
-        clear_all_button = QPushButton(text="CE", objectName="delete_button")
+        clear_all_button = QPushButton(text="CE", objectName="operation_button")
         clear_all_button.clicked.connect(self.clear_all)
         layout.addWidget(clear_all_button, 0, 1)
         
         # - Creating clear button, which clears all the values
-        clear_button = QPushButton(text="C", objectName="delete_button")
+        clear_button = QPushButton(text="C", objectName="operation_button")
         clear_button.clicked.connect(self.clear)
         layout.addWidget(clear_button, 0, 2)
         
         # - Creating a delete button, which deletes last entered character
-        delete_button = QPushButton(text="<-", objectName="delete_button")
+        delete_button = QPushButton(text="<-", objectName="operation_button")
         delete_button.clicked.connect(self.delete)
         layout.addWidget(delete_button, 0, 3)
         
@@ -137,7 +138,7 @@ class Window(QDialog):
                 
         # Creating sixth row of buttons
         # - Creating a +/- button, which turns value of current number to the oposite one
-        reverse_button = QPushButton(text="+/-", objectName="operation_button")
+        reverse_button = QPushButton(text="+/-")
         reverse_button.clicked.connect(lambda:self.operation(type="reverse"))
         layout.addWidget(reverse_button, 6, 0)
         

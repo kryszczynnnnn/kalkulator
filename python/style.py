@@ -2,22 +2,21 @@ QSS = '''
 
 *{
     font-size: 16px;
-    font-weight: bold;
-    color: #fff;
+    color: #FFDDC6;
 }
 
 QScrollArea{
-    background-color: #000000;
+    background: transparent;
     border: none;
 }
 
 QWidget#scroll_widget{
-    background-color: #000000;
+    background: transparent;
     border: none;
 }
 
 QLayout#scroll_widget{
-    background-color: #000000;
+    background: transparent;
     border: none;
 }
 
@@ -27,7 +26,7 @@ QLabel{
 
 QLabel#wyliczone{
     font-size: 16px;
-    color: #999999;
+    font-weight: bold;
 }
 
 QLabel#wpis{
@@ -35,16 +34,13 @@ QLabel#wpis{
 }
 
 QDialog{
-    background-color: #000000;
-    padding: 4px;
-    margin: 4px;
+    background-color: #261208;
+    font-family: 'Montserrat';
+    font-weight: bold;
 }
 
 QPushButton{
-    background: transparent;
-    border-width: 2px;
-	border-style: solid;
-	border-color: #bbbbbb;
+    background-color: #42200B; 
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -52,6 +48,7 @@ QPushButton{
 
 QPushButton#history_button{
     background-color: #222222;
+    width: 600px;
     text-align: left;
     border: none;
     width: auto;
@@ -71,10 +68,7 @@ QPushButton:hover{
 }
 
 QPushButton#operation_button{
-    background-color: #1064e3;
-    border-width: 2px;
-	border-style: solid;
-	border-color: #1064e3;
+    background-color: #553E2F;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -90,31 +84,8 @@ QPushButton#operation_button:hover{
     border-radius: 8px;
 }
 
-QPushButton#delete_button{
-    background-color: #ed3939;
-    border-width: 2px;
-	border-style: solid;
-	border-color: #ed3939;
-    width: 64px;
-    height: 64px;
-    border-radius: 8px;
-}
-
-QPushButton#delete_button:hover{
-    background-color: #eb6767;
-    border-width: 2px;
-	border-style: solid;
-	border-color: #eb6767;
-    width: 64px;
-    height: 64px;
-    border-radius: 8px;
-}
-
 QPushButton#equals_button{
-    background-color: #e1e1e1;
-    border-width: 2px;
-	border-style: solid;
-	border-color: #e1e1e1;
+    background-color: #E07027;
     width: 64px;
     height: 64px;
     color: #000000;
@@ -134,8 +105,6 @@ QPushButton#equals_button:hover{
 
 QGroupBox#guziki_wrapper{
     border: none;
-    padding: 0px;
-    margin: 0px;
     width: 100%;
 }
 
