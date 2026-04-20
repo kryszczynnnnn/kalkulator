@@ -185,11 +185,12 @@ function percent() {
     valueBox.textContent = result;
 }
 
+
+document.getElementById("history-btn").addEventListener("click", showHistory);
+
 module.exports = {
     addnumber,
     operation,
     calculate,
     clearDisplay
 };
-
-document.getElementById("history-btn").addEventListener("click", showHistory);
