@@ -20,6 +20,7 @@ class Window(QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Kalkulator")
+        self.setMinimumSize(640, 400)
         self.setStyleSheet(QSS)
         self.initUI()
     
@@ -40,14 +41,14 @@ class Window(QDialog):
         
         # Creating a history widget
         history_widget_wrapper = QVBoxLayout(objectName = "scroll_widget")
-        history_widget_label = QLabel("Historia Obliczeń")
+        history_widget_label = QLabel("Historia Obliczeń", objectName = "history_label")
         
         self.history_layout = QVBoxLayout(objectName = "scroll_widget")
         self.history_layout.setAlignment(Qt.AlignTop)
         history_widget = QWidget(objectName = "scroll_widget")
         
         # Defining a scroll wrapper for a history widget
-        history_widget_scroll_wrapper = QScrollArea()
+        history_widget_scroll_wrapper = QScrollArea(objectName = "scroll_widget")
         
         history_widget_scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         history_widget_scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)

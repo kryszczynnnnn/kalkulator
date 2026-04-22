@@ -2,11 +2,12 @@ QSS = '''
 
 *{
     font-size: 16px;
+    font-weight: bold;
     color: #FFDDC6;
 }
 
 QScrollArea{
-    background: transparent;
+    background-color: #64300E;
     border: none;
 }
 
@@ -47,21 +48,28 @@ QPushButton{
 }
 
 QPushButton#history_button{
-    background-color: #222222;
+    background: transparent;
     width: 600px;
     text-align: left;
-    border: none;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFDDC6;
     width: auto;
     height: 48px;
     border-radius: 8px;
-    padding: 4px;
+    padding: 10px;
+    text-align: right;
+}
+
+QPushButton#history_button:hover{
+    background-color: #a1a1a1;
 }
 
 QPushButton:hover{
-    background-color: #aaaaaa;
+    background-color: #64300E;
     border-width: 2px;
 	border-style: solid;
-	border-color: #aaaaaa;
+	border-color: #64300E;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -75,10 +83,10 @@ QPushButton#operation_button{
 }
 
 QPushButton#operation_button:hover{
-    background-color: #3296e3;
+    background-color: #64300E;
     border-width: 2px;
 	border-style: solid;
-	border-color: #3296e3;
+	border-color: #64300E;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -88,18 +96,18 @@ QPushButton#equals_button{
     background-color: #E07027;
     width: 64px;
     height: 64px;
-    color: #000000;
+    color: #261205;
     border-radius: 8px;
 }
 
 QPushButton#equals_button:hover{
-    background-color: #f5f5f5;
+    background-color: #64300E;
     border-width: 2px;
 	border-style: solid;
-	border-color: #f5f5f5;
+	border-color: #64300E;
     width: 64px;
     height: 64px;
-    color: #000000;
+    color: #261205;
     border-radius: 8px;
 }
 
