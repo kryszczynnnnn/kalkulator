@@ -1,5 +1,6 @@
-﻿// Author of this code and program is Serhii Skyba
+// Author of this code and program is Serhii Skyba
 
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Media;
 using System.Printing;
@@ -18,13 +19,24 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Calculator
 {
+    public class HistoryEntry
+    {
+        public string Equation { get; set; }
+        public string Result { get; set; }
+        public HistoryEntry(string equation, string result)
+        {
+            Equation = equation;
+            Result = result;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     
     public partial class MainWindow : Window
     {
-        // Predefined Variables
+        public ObservableCollection<HistoryEntry> History { get; set; }
 
         private string buttonNumber; // Used for identifying, what number button is pressed
 
@@ -43,7 +55,16 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-            
+            History = new ObservableCollection<HistoryEntry>();
+            DataContext = this;
+        }
+
+        private void History_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var entry = (HistoryEntry)button.DataContext;
+            result.Text = entry.Equation + "=";
+            inputbox.Text = entry.Result;
         }
         
         // Used for entering numbers through GUI
@@ -93,16 +114,6 @@ namespace Calculator
                         break;
                     case "*":
                         Calc = NumberOne * NumberTwo;
-                        Wpisane = Calc.ToString();
-                        result.Text = Wpisane;
-                        break;
-                    case "^":
-                        Calc = Math.Pow(NumberOne, NumberTwo);
-                        Wpisane = Calc.ToString();
-                        result.Text = Wpisane;
-                        break;
-                    case "log":
-                        Calc = Math.Log(NumberOne, NumberTwo);
                         Wpisane = Calc.ToString();
                         result.Text = Wpisane;
                         break;
@@ -205,26 +216,35 @@ namespace Calculator
             NumberOne = double.Parse(inputbox.Text);
             NumberOne = Math.Sqrt(NumberOne);
             inputbox.Text = NumberOne.ToString();
+            History.Insert(0, new HistoryEntry($"√{NumberOne}", inputbox.Text));
         }
 
         // Calculates cubic root of number
-        private void CubicRoot(object sender, RoutedEventArgs e)
+        private void PowerOfTwo(object sender, RoutedEventArgs e)
         {
             NumberOne = double.Parse(inputbox.Text);
-            NumberOne = Math.Cbrt(NumberOne);
+            NumberOne = Math.Pow(NumberOne, 2);
             inputbox.Text = NumberOne.ToString();
+            History.Insert(0, new HistoryEntry($"{NumberOne}²", inputbox.Text));
         }
 
-        // Calculates factorial of a number
-        private void Factorial(object sender, RoutedEventArgs e)
+        // Turns value into percent
+
+        private void Percent(object sender, RoutedEventArgs e)
         {
             NumberOne = double.Parse(inputbox.Text);
-            int factorial = 1;
-            for (int i = 1; i <= NumberOne; i++)
-            {
-                factorial = factorial * i;
-            }
-            inputbox.Text = factorial.ToString();
+            NumberOne = NumberOne * 0.01;
+            inputbox.Text = NumberOne.ToString();
+            History.Insert(0, new HistoryEntry($"{NumberOne}*0.01", inputbox.Text));
+        }
+
+        // Divides 1 by the current number
+        private void DivideByOne(object sender, RoutedEventArgs e)
+        {
+            NumberOne = double.Parse(inputbox.Text);
+            NumberOne = 1 / NumberOne;
+            inputbox.Text = NumberOne.ToString();
+            History.Insert(0, new HistoryEntry($"1/{NumberOne}", inputbox.Text));
         }
 
         // Calculates final result
@@ -232,6 +252,7 @@ namespace Calculator
         {
             NumberTwo = double.Parse(inputbox.Text);
             result.Text = "";
+            string equation = $"{NumberOne} {FunctionType} {NumberTwo}";
             
             // Depending on value of FunctionType, calculates final result using two numbers
             switch (FunctionType)
@@ -280,6 +301,7 @@ namespace Calculator
             }
             if (inputbox.Text == "Nan" || inputbox.Text == "NaN" || inputbox.Text == "∞")
                 inputbox.Text = "0";
+            History.Insert(0, new HistoryEntry(equation, inputbox.Text));
         }
 
         // Those are keybindings, they are use this program using only keyboard
@@ -362,12 +384,6 @@ namespace Calculator
                         break;
                     case "Multiply":
                         FunctionType = "*";
-                        break;
-                    case "P":
-                        FunctionType = "^";
-                        break;
-                    case "L":
-                        FunctionType = "log";
                         break;
                 }
                 NumberOne = double.Parse(inputbox.Text);
