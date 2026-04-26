@@ -185,6 +185,7 @@ function percent() {
     valueBox.textContent = result;
 }
 
+
 document.getElementById("history-btn").addEventListener("click", showHistory);
 
 module.exports = {
