@@ -8,7 +8,7 @@
 
 body {
     height: 100vh;
-    background-color: #000000;
+    background-color: #261205;
     display: flex;
 }
 
@@ -25,6 +25,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
+    z-index: 5;
 }
 
 .history-btn:hover {
@@ -50,11 +51,28 @@ body {
 .container .value-box {
     display: flex;
     height: 200px;
-    overflow: hidden;
+    overflow-x: auto;
+    padding: 0px 10px;
     justify-content: flex-end;
     align-items: center;
     font-size: 60px;
     color: #fff;
+}
+
+#value-box {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#value-box::-webkit-scrollbar {
+    background-color: transparent;
+    height: 2px;
+}
+
+#value-box::-webkit-scrollbar-thumb {
+    background-color: #ffffff63;
+    border-radius: 36px;
 }
 
 .container .buttons-container {
@@ -69,38 +87,37 @@ body {
 .container .buttons-container button {
     cursor: pointer;
     padding: 20px;
-    border-radius: 16px;
+    border-radius: 8px;
     font-weight: 800;
     font-size: 100%;
 }
 
 .operation-btn {
     border: none;
-    background-color: #2326ff;
+    background-color: #553e2f;
     color: #fff;
 }
 
 .operation-btn:hover {
-    background-color: #2327ffc7;
+    background-color: #553e2fb4;
 }
 
 .number-btn {
-    border: 1px solid #ffffff2c;
-    background-color: #000000;
-    color: #fff;
-    box-shadow: 0px 0px 5px #ffffff49;
+    /* border: 1px solid #ffffff2c; */
+    border: none;
+    background-color: #422009;
+    color: #ffffff;
     transition: all 0.3s ease;
 }
 
 .equal-btn {
-    background-color: #fff;
-    border: 2px solid #808080;
+    background-color: #e07027;
+    border: none;
     border-collapse: collapse;
 }
 
 .number-btn:hover {
-    scale: 1.05;
-    background-color: #131313;
+    background-color: #42200977;
 }
 
 .history-container {
@@ -108,7 +125,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: #030303bd;
+    background-color: #3a1b07;
     padding: 10px 15px;
     min-width: 300px;
 }
@@ -133,13 +150,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 7px;
-    border: none;
-    background-color: none;
-    background-color: #080808;
+    border: 1px solid #fff;
+    background-color: transparent;
     color: #fff;
-    width: 100%;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     text-align: right;
     margin: 5px 0px;
     cursor: pointer;
@@ -147,7 +162,7 @@ body {
 }
 
 .history-container .history-tab .equation-btn:hover {
-    background-color: #161616;
+    background-color: #ffffff0e;
 }
 
 .history-container .history-tab .equation-btn .equation {
