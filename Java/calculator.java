@@ -11,6 +11,7 @@ public class calculator extends JFrame {
     private double firstNumber = 0;
     private String operator = "";
     private boolean newInput = true;
+    private int currentFontSize = 54;
 
     private JPanel historyPanel;
 
@@ -59,7 +60,7 @@ public class calculator extends JFrame {
         buttonsPanel.setBackground(bg);
 
         String[] buttons = {
-                "%", "CE", "C", "⌫",
+                "%", "CE", "C", "<-",
                 "1/x", "x²", "√x", "/",
                 "7", "8", "9", "×",
                 "4", "5", "6", "−",
@@ -112,118 +113,153 @@ public class calculator extends JFrame {
         setVisible(true);
     }
 
+    private void adjustFontSizeToFit() {
+    int w = mainDisplay.getWidth() - 20;  // mały margines
+    if (w <= 0) return;
+
+    Font base = new Font("Segoe UI", Font.PLAIN, 54);
+    int size = currentFontSize;
+    FontMetrics fm;
+
+    do {
+        Font f = new Font(base.getName(), base.getStyle(), size);
+        fm = mainDisplay.getFontMetrics(f);
+        if (fm.stringWidth(mainDisplay.getText()) <= w) {
+            break;
+        }
+        size--;
+    } while (size > 12);
+
+    currentFontSize = size;
+    mainDisplay.setFont(new Font(base.getName(), base.getStyle(), currentFontSize));
+    mainDisplay.revalidate();
+    mainDisplay.repaint();
+}
+
     private void handleInput(String input) {
-        String currentText = mainDisplay.getText();
+    String currentText = mainDisplay.getText();
 
-        if (input.matches("[0-9]")) {
-            if (newInput || currentText.equals("0")) {
-                mainDisplay.setText(input);
-                newInput = false;
-            } else {
-                mainDisplay.setText(currentText + input);
-            }
-            return;
+    if (input.matches("[0-9]")) {
+        if (newInput || currentText.equals("0")) {
+            mainDisplay.setText(input);
+            newInput = false;
+        } else {
+            mainDisplay.setText(currentText + input);
         }
-
-        if (input.equals(",")) {
-            if (!currentText.contains(",")) {
-                mainDisplay.setText(currentText + ",");
-                newInput = false;
-            }
-            return;
-        }
-
-        if (input.equals("CE")) {
-            mainDisplay.setText("0");
-            newInput = true;
-            return;
-        }
-
-        if (input.equals("C")) {
-            mainDisplay.setText("0");
-            historyDisplay.setText(" ");
-            firstNumber = 0;
-            operator = "";
-            newInput = true;
-            return;
-        }
-
-        if (input.equals("⌫")) {
-            if (currentText.length() > 1) {
-                mainDisplay.setText(currentText.substring(0, currentText.length() - 1));
-            } else {
-                mainDisplay.setText("0");
-                newInput = true;
-            }
-            return;
-        }
-
-        if (input.equals("+/-")) {
-            double val = parseDisplay(currentText);
-            mainDisplay.setText(format(-val));
-            return;
-        }
-
-        if (input.equals("1/x")) {
-            double val = parseDisplay(currentText);
-            if (val == 0) {
-                mainDisplay.setText("Error");
-            } else {
-                mainDisplay.setText(format(1.0 / val));
-            }
-            return;
-        }
-
-        if (input.equals("x²")) {
-            double val = parseDisplay(currentText);
-            mainDisplay.setText(format(val * val));
-            return;
-        }
-
-        if (input.equals("√x")) {
-            double val = parseDisplay(currentText);
-            if (val < 0) {
-                mainDisplay.setText("Error");
-            } else {
-                mainDisplay.setText(format(Math.sqrt(val)));
-            }
-            return;
-        }
-
-        if (input.matches("[/×−+]")) {
-            firstNumber = parseDisplay(currentText);
-            operator = input;
-            historyDisplay.setText(format(firstNumber) + " " + operator);
-            newInput = true;
-            mainDisplay.setText("0");
-            return;
-        }
-
-        if (input.equals("=")) {
-            double secondNumber = parseDisplay(currentText);
-            double result = 0;
-
-            switch (operator) {
-                case "+" -> result = firstNumber + secondNumber;
-                case "−" -> result = firstNumber - secondNumber;
-                case "×" -> result = firstNumber * secondNumber;
-                case "/" -> {
-                    if (secondNumber == 0) {
-                        mainDisplay.setText("Error");
-                        return;
-                    }
-                    result = firstNumber / secondNumber;
-                }
-            }
-
-            String equation = format(firstNumber) + " " + operator + " " + format(secondNumber) + " = " + format(result);
-            addToHistory(equation, result);
-
-            mainDisplay.setText(format(result));
-            historyDisplay.setText(" ");
-            newInput = true;
-        }
+        adjustFontSizeToFit();   
+        return;
     }
+
+    if (input.equals(",")) {
+        if (!currentText.contains(",")) {
+            mainDisplay.setText(currentText + ",");
+            newInput = false;
+        }
+        adjustFontSizeToFit();   
+        return;
+    }
+
+    if (input.equals("CE")) {
+        mainDisplay.setText("0");
+        newInput = true;
+        adjustFontSizeToFit();   
+        return;
+    }
+
+    if (input.equals("C")) {
+        mainDisplay.setText("0");
+        historyDisplay.setText(" ");
+        firstNumber = 0;
+        operator = "";
+        newInput = true;
+        adjustFontSizeToFit();   
+        return;
+    }
+
+    if (input.equals("<-")) {
+        if (currentText.length() > 1) {
+            mainDisplay.setText(currentText.substring(0, currentText.length() - 1));
+        } else {
+            mainDisplay.setText("0");
+            newInput = true;
+        }
+        adjustFontSizeToFit();   
+        return;
+    }
+
+    if (input.equals("+/-")) {
+        double val = parseDisplay(currentText);
+        mainDisplay.setText(format(-val));
+        adjustFontSizeToFit();   
+        return;
+    }
+
+    if (input.equals("1/x")) {
+        double val = parseDisplay(currentText);
+        if (val == 0) {
+            mainDisplay.setText("Error");
+        } else {
+            mainDisplay.setText(format(1.0 / val));
+        }
+        adjustFontSizeToFit();   // <-- dodaj tutaj
+        return;
+    }
+
+    if (input.equals("x²")) {
+        double val = parseDisplay(currentText);
+        mainDisplay.setText(format(val * val));
+        adjustFontSizeToFit();   // <-- dodaj tutaj
+        return;
+    }
+
+    if (input.equals("√x")) {
+        double val = parseDisplay(currentText);
+        if (val < 0) {
+            mainDisplay.setText("Error");
+        } else {
+            mainDisplay.setText(format(Math.sqrt(val)));
+        }
+        adjustFontSizeToFit();   // <-- dodaj tutaj
+        return;
+    }
+
+    if (input.matches("[/×−+]")) {
+        firstNumber = parseDisplay(currentText);
+        operator = input;
+        historyDisplay.setText(format(firstNumber) + " " + operator);
+        newInput = true;
+        mainDisplay.setText("0");
+        adjustFontSizeToFit();   // <-- dodaj tutaj
+        return;
+    }
+
+    if (input.equals("=")) {
+        double secondNumber = parseDisplay(currentText);
+        double result = 0;
+
+        switch (operator) {
+            case "+" -> result = firstNumber + secondNumber;
+            case "−" -> result = firstNumber - secondNumber;
+            case "×" -> result = firstNumber * secondNumber;
+            case "/" -> {
+                if (secondNumber == 0) {
+                    mainDisplay.setText("Error");
+                    adjustFontSizeToFit();   // <-- dodaj tutaj
+                    return;
+                }
+                result = firstNumber / secondNumber;
+            }
+        }
+
+        String equation = format(firstNumber) + " " + operator + " " + format(secondNumber) + " = " + format(result);
+        addToHistory(equation, result);
+
+        mainDisplay.setText(format(result));
+        historyDisplay.setText(" ");
+        newInput = true;
+        adjustFontSizeToFit();   // <-- dodaj tutaj
+    }
+}
 
     private void addToHistory(String equation, double result) {
         JButton btn = new RoundedButton(equation);

@@ -25,6 +25,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
+    z-index: 5;
 }
 
 .history-btn:hover {
@@ -50,13 +51,28 @@ body {
 .container .value-box {
     display: flex;
     height: 200px;
-    overflow: hidden;
-    font-size: auto;
+    overflow-x: auto;
     padding: 0px 10px;
     justify-content: flex-end;
     align-items: center;
     font-size: 60px;
     color: #fff;
+}
+
+#value-box {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#value-box::-webkit-scrollbar {
+    background-color: transparent;
+    height: 2px;
+}
+
+#value-box::-webkit-scrollbar-thumb {
+    background-color: #ffffff63;
+    border-radius: 36px;
 }
 
 .container .buttons-container {
