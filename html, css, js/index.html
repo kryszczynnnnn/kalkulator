@@ -12,7 +12,7 @@
     <div class="container">
         <div id="previous-input"></div>
         <div class="value-box">
-            <span id="value-box"></span>
+            <span id="value-box">0</span>
         </div>
         <div class="buttons-container">
             <button onclick='percent()' class="operation-btn">%</button>
@@ -45,26 +45,6 @@
     <div class="history-container" id="history-container">
         <span class="container-title">History</span>
         <div class="history-tab" id="history-tab">
-            <div class="equation-btn">
-                <div class="equation">${first} ${operator} ${scnd} =</div>
-                <div class="result">${result}</div>
-            </div>
-            <div class="equation-btn">
-                <div class="equation">${first} ${operator} ${scnd} =</div>
-                <div class="result">${result}</div>
-            </div>
-            <div class="equation-btn">
-                <div class="equation">${first} ${operator} ${scnd} =</div>
-                <div class="result">${result}</div>
-            </div>
-            <div class="equation-btn">
-                <div class="equation">${first} ${operator} ${scnd} =</div>
-                <div class="result">${result}</div>
-            </div>
-            <div class="equation-btn">
-                <div class="equation">${first} ${operator} ${scnd} =</div>
-                <div class="result">${result}</div>
-            </div>
         </div>
         <button class="clearHistory-btn" id="clearHistory-btn" onclick="clearHistory()"><i class="ri-history-line"></i> Clear history</button>
     </div>
