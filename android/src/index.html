@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Kalkulator</title>
+</head>
+<body>
+    <button class="history-btn" id="history-btn"><i class="ri-history-line"></i></button>
+    <div class="container">
+        <div id="previous-input"></div>
+        <div class="value-box">
+            <span id="value-box">0</span>
+        </div>
+        <div class="buttons-container">
+            <button onclick='percent()' class="operation-btn">%</button>
+            <button onclick='clearEntry()' class="operation-btn">CE</button>
+            <button onclick='clearDisplay()' class="operation-btn">C</button>
+            <button onclick='backOne()' class="operation-btn">X</button>
+            <button onclick='instantOperation("1/x")' class="operation-btn">\( \frac{1}{x} \)</button>
+            <button onclick='instantOperation("x2")' class="operation-btn">\(x^{2}\)</button>
+            <button onclick='instantOperation("sqrt")' class="operation-btn">\(\sqrt[2]{x}\)</button>
+            <button onclick='operation("/")' class="operation-btn">/</button>
+            <button onclick='addnumber("7")' class="number-btn">7</button>
+            <button onclick='addnumber("8")' class="number-btn">8</button>
+            <button onclick='addnumber("9")' class="number-btn">9</button>
+            <button onclick='operation("*")' class="operation-btn">x</button>
+            <button onclick='addnumber("4")' class="number-btn">4</button>
+            <button onclick='addnumber("5")' class="number-btn">5</button>
+            <button onclick='addnumber("6")' class="number-btn">6</button>
+            <button onclick='operation("-")' class="operation-btn">-</button>
+            <button onclick='addnumber("1")' class="number-btn">1</button>
+            <button onclick='addnumber("2")' class="number-btn">2</button>
+            <button onclick='addnumber("3")' class="number-btn">3</button>
+            <button onclick='operation("+")' class="operation-btn">+</button>
+            <button onclick='charChange("")' class="number-btn">+/-</button>
+            <button onclick='addnumber("0")' class="number-btn">0</button>
+            <button onclick='addnumber(".")' class="number-btn">,</button>
+            <button onclick='equals()' class="equal-btn">=</button>
+
+        </div>
+    </div>
+    <div class="history-container" id="history-container">
+        <span class="container-title">History</span>
+        <div class="history-tab" id="history-tab">
+        </div>
+        <button class="clearHistory-btn" id="clearHistory-btn" onclick="clearHistory()"><i class="ri-history-line"></i> Clear history</button>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

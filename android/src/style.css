@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #261205;
+    display: flex;
+}
+
+.history-btn {
+    position: absolute;
+    display: none;
+    top: 30px;
+    left: 30px;
+    padding: 10px;
+    border: none;
+    border-radius: 28px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 3px #ffffffb0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.history-btn:hover {
+    background-color: #ffffffb0;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 3fr 2fr;
+    height: 100vh;
+    flex: 1;
+}
+
+.container #previous-input {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    color: #fff;
+    text-align: right;
+    font-weight: 300;
+}
+
+.container .value-box {
+    display: flex;
+    height: 200px;
+    overflow-x: auto;
+    padding: 0px 10px;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 60px;
+    color: #fff;
+}
+
+#value-box {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+#value-box::-webkit-scrollbar {
+    background-color: transparent;
+    height: 2px;
+}
+
+#value-box::-webkit-scrollbar-thumb {
+    background-color: #ffffff63;
+    border-radius: 36px;
+}
+
+.container .buttons-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
+    flex: 1;
+    margin: 5px 10px;
+}
+
+.container .buttons-container button {
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 100%;
+}
+
+.operation-btn {
+    border: none;
+    background-color: #553e2f;
+    color: #fff;
+}
+
+.operation-btn:hover {
+    background-color: #553e2fb4;
+}
+
+.number-btn {
+    /* border: 1px solid #ffffff2c; */
+    border: none;
+    background-color: #422009;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.equal-btn {
+    background-color: #e07027;
+    border: none;
+    border-collapse: collapse;
+}
+
+.number-btn:hover {
+    background-color: #42200977;
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #3a1b07;
+    padding: 10px 15px;
+    min-width: 300px;
+}
+
+.history-container .container-title {
+    width: 100%;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.history-container .history-tab {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.history-container .history-tab .equation-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: right;
+    margin: 5px 0px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.history-container .history-tab .equation-btn:hover {
+    background-color: #ffffff0e;
+}
+
+.history-container .history-tab .equation-btn .equation {
+    font-size: 13px;
+    color: #888888;
+}
+
+.history-container .history-tab .equation-btn .result {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.history-container .clearHistory-btn {
+    display: none;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: #fff;
+    font-weight: 300;
+    font-size: 18px;
+    border-collapse: collapse;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: all 0.2s ease;
+}
+
+.history-container .clearHistory-btn:hover {
+    border: 1px solid #383838;
+}
+
+@media screen and (max-width: 600px) {
+    .history-btn {
+        display: block;
+    }
+    .history-container {
+        display: none;
+        right: 0px;
+        transform: translateX(100%);
+        height: 100vh;
+        transition: all 1s ease;
+    }
+
+    .historyTab-active {
+        position: absolute;
+        display: block;
+        top: 0px;
+        right: 0px;
+        transform: translateX(0%);
+        z-index: 2;
+    }
+
+    .container {
+        grid-template-rows: 2fr 3fr;
+    }
+}
