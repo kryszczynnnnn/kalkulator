@@ -114,7 +114,7 @@ public class calculator extends JFrame {
     }
 
     private void adjustFontSizeToFit() {
-    int w = mainDisplay.getWidth() - 20;  // mały margines
+    int w = mainDisplay.getWidth() - 20;  
     if (w <= 0) return;
 
     Font base = new Font("Segoe UI", Font.PLAIN, 54);
@@ -201,14 +201,14 @@ public class calculator extends JFrame {
         } else {
             mainDisplay.setText(format(1.0 / val));
         }
-        adjustFontSizeToFit();   // <-- dodaj tutaj
+        adjustFontSizeToFit();   
         return;
     }
 
     if (input.equals("x²")) {
         double val = parseDisplay(currentText);
         mainDisplay.setText(format(val * val));
-        adjustFontSizeToFit();   // <-- dodaj tutaj
+        adjustFontSizeToFit();  
         return;
     }
 
@@ -219,7 +219,7 @@ public class calculator extends JFrame {
         } else {
             mainDisplay.setText(format(Math.sqrt(val)));
         }
-        adjustFontSizeToFit();   // <-- dodaj tutaj
+        adjustFontSizeToFit();  
         return;
     }
 
@@ -229,7 +229,7 @@ public class calculator extends JFrame {
         historyDisplay.setText(format(firstNumber) + " " + operator);
         newInput = true;
         mainDisplay.setText("0");
-        adjustFontSizeToFit();   // <-- dodaj tutaj
+        adjustFontSizeToFit();  
         return;
     }
 
@@ -244,7 +244,7 @@ public class calculator extends JFrame {
             case "/" -> {
                 if (secondNumber == 0) {
                     mainDisplay.setText("Error");
-                    adjustFontSizeToFit();   // <-- dodaj tutaj
+                    adjustFontSizeToFit();   
                     return;
                 }
                 result = firstNumber / secondNumber;
@@ -257,7 +257,7 @@ public class calculator extends JFrame {
         mainDisplay.setText(format(result));
         historyDisplay.setText(" ");
         newInput = true;
-        adjustFontSizeToFit();   // <-- dodaj tutaj
+        adjustFontSizeToFit();   
     }
 }
 
