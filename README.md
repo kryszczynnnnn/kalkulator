@@ -215,3 +215,59 @@ Testy sprawdzają:
 calculator.java
 ## Autor
 Krystian Tarnowski
+
+# Kalkulator Android
+
+## Opis projektu
+
+Projekt: Repozytorium GitHub
+
+Opis projektu
+
+„Kalkulator” to aplikacja mobilna na system Android umożliwiająca wykonywanie podstawowych działań matematycznych.
+Projekt został pierwotnie stworzony przy użyciu technologii webowych (HTML, CSS oraz JavaScript), a następnie przekonwertowany na aplikację mobilną Android z wykorzystaniem frameworka Tauri.
+
+Dzięki temu aplikacja zachowuje lekki i szybki interfejs webowy, jednocześnie działając jako natywna aplikacja mobilna.
+
+## Funkcjonalności
+- dodawanie,
+- odejmowanie,
+- mnożenie,
+- dzielenie,
+- obsługa liczb dziesiętnych,
+- wyświetlanie wyniku działań,
+- czyszczenie aktualnego działania,
+- prosty i responsywny interfejs użytkownika.
+## Wykorzystane technologie
+
+- HTML
+- CSS
+- JavaScript
+- Tauri
+
+Tauri zostało użyte do opakowania aplikacji webowej jako aplikacji mobilnej działającej na Androidzie.
+
+## Aplikacja posiada prosty interfejs składający się z:
+
+- wyświetlacza działań,
+- wyświetlacza wyniku,
+- przycisków cyfr,
+- operatorów matematycznych,
+- przycisku usuwania danych,
+- przycisku obliczania wyniku.
+
+## Uruchomienie projektu
+**Wymagania**
+```
+- Node.js
+- npm
+- Android Studio
+- Android SDK
+- Rust
+- Tauri CLI
+```
+
+
+## Autorzy
+Serhii Skyba
+Krystian Tarnowski
