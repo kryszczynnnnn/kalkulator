@@ -218,3 +218,23 @@ body {
         grid-template-rows: 2fr 3fr;
     }
 }
+
+@media (orientation: landscape) {
+    body {
+        height: 100vh;
+    }
+
+    .container {
+        display: grid;
+        grid-template-rows: 1fr 1fr 5fr;
+    }
+
+    .container .value-box{
+        height: auto;
+        overflow-y: hidden;
+    }
+
+    .container .buttons-container button {
+        padding: 0px;
+    }
+}
